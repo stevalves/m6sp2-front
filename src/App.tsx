@@ -1,9 +1,14 @@
+import { AuthProvider } from "./providers/AuthProvider";
 import { RoutesMain } from "./routes";
+import { GlobalStyle } from "./styles/GlobalStyles";
 
 function App() {
   return (
     <>
-      <RoutesMain />
+      <GlobalStyle />
+      <AuthProvider>
+        <RoutesMain />
+      </AuthProvider>
     </>
   );
 }

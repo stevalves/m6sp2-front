@@ -6,13 +6,13 @@ import { useContacts } from "../../../hooks/useContacts";
 
 export const Contatos = () => {
   const { contacts, refresh } = useContacts();
-  
+
   const [modal, setModal] = useState(false);
-  const handleModal = () => setModal(!modal)
+  const handleModal = () => setModal(!modal);
 
   useEffect(() => {
-    refresh()
-  }, [])
+    refresh();
+  }, []);
 
   return (
     <StyledContact>
@@ -22,7 +22,11 @@ export const Contatos = () => {
           <ContactCard contact={contact} />
         ))}
       </ul>
-      {modal && <Modal toggleModal={handleModal}><></></Modal>}
+      {modal && (
+        <Modal toggleModal={handleModal}>
+          <></>
+        </Modal>
+      )}
     </StyledContact>
   );
 };

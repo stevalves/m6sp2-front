@@ -1,37 +1,43 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Modal } from "../Modal";
-import { StyledAddContactForm } from "./styles";
+import { StyledEditContactForm } from "./styles";
 import { useForm } from "react-hook-form";
-import { RegisterContactData, schema } from "./validation";
+import { EditContactData, schema } from "./validation";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useContacts } from "../../hooks/useContacts";
 import { Contact } from "../../contexts/ContactContexts/types";
 import { Input } from "../Input";
 
-type AddContactModalProps = {
+type EditContactModalProps = {
   toggleModal: () => void;
+  contact: Contact;
 };
 
-export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
+export const EditContactModal = ({
+  toggleModal,
+  contact,
+}: EditContactModalProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterContactData>({
+  } = useForm<EditContactData>({
     resolver: zodResolver(schema),
   });
 
-  const { setContacts } = useContacts();
+  const { refresh } = useContacts();
 
-  const createContact = async (data: RegisterContactData) => {
+  const { name, email, phone } = contact;
+
+  const editContact = async (data: EditContactData) => {
     try {
-      const res = await api.post<Contact>("/contacts", {
+      await api.patch<Contact>(`/contacts/${contact.id}`, {
         ...data,
         phone: Number(data.phone),
       });
 
-      setContacts(previousContacts => [res.data, ...previousContacts])
+      refresh();
       toggleModal();
       toast.success("Contato cadastrado com sucesso!");
     } catch (error) {
@@ -43,13 +49,14 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
 
   return (
     <Modal toggleModal={toggleModal}>
-      <StyledAddContactForm onSubmit={handleSubmit(createContact)}>
-        <h2>Adicionar Contato</h2>
+      <StyledEditContactForm onSubmit={handleSubmit(editContact)}>
+        <h2>Editar Contato</h2>
         <Input
           id="name"
           label="Nome"
           placeholder="Insira o nome do contato..."
           type="text"
+          value={name}
           {...register("name")}
         />
         {errors.name && <span>{errors.name.message}</span>}
@@ -58,6 +65,7 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
           label="E-mail"
           placeholder="Insira o e-mail do contato..."
           type="email"
+          value={email}
           {...register("email")}
         />
         {errors.email && <span>{errors.email.message}</span>}
@@ -66,11 +74,12 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
           label="Telefone"
           placeholder="Insira o telefone do contato..."
           type="number"
+          value={String(phone)}
           {...register("phone")}
         />
         {errors.phone && <span>{errors.phone.message}</span>}
-        <button type="submit">Adicionar</button>
-      </StyledAddContactForm>
+        <button type="submit">Salvar</button>
+      </StyledEditContactForm>
     </Modal>
   );
 };

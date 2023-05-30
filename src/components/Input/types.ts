@@ -5,4 +5,5 @@ export interface iInputValues extends InputHTMLAttributes<HTMLInputElement> {
   type: string;
   id: string;
   placeholder: string;
+  value?: string
 }

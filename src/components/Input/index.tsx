@@ -3,7 +3,7 @@ import { iInputValues } from "./types";
 import { forwardRef } from "react";
 
 export const Input = forwardRef<HTMLInputElement, iInputValues>(
-  ({ type, label, id, placeholder, ...rest }, ref) => {
+  ({ type, label, id, placeholder, value, ...rest }, ref) => {
     return (
       <StyledInput>
         <label htmlFor={id}>{label}</label>
@@ -13,6 +13,7 @@ export const Input = forwardRef<HTMLInputElement, iInputValues>(
           placeholder={placeholder}
           {...rest}
           ref={ref}
+          defaultValue={value}
         />
       </StyledInput>
     );

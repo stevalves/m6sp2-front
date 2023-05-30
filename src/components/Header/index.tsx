@@ -17,7 +17,7 @@ export function Header({ contacts }: iHeader) {
   const [modal, setModal] = useState(false);
   const handleModal = () => setModal(!modal);
 
-  const handlePage = (e: React.MouseEvent<HTMLButtonElement>, to: string) => {
+  const handlePage = (to: string) => {
     handleClick();
     navigate(to);
   };
@@ -42,8 +42,8 @@ export function Header({ contacts }: iHeader) {
         <ul role="menu">
           <li>
             <button
-              onClick={(e) => {
-                handlePage(e, "");
+              onClick={() => {
+                handlePage("");
               }}
             >
               Home
@@ -51,8 +51,8 @@ export function Header({ contacts }: iHeader) {
           </li>
           <li>
             <button
-              onClick={(e) => {
-                handlePage(e, "perfil");
+              onClick={() => {
+                handlePage("perfil");
               }}
             >
               Perfil
@@ -60,8 +60,8 @@ export function Header({ contacts }: iHeader) {
           </li>
           <li>
             <button
-              onClick={(e) => {
-                handlePage(e, "sobre");
+              onClick={() => {
+                handlePage("sobre");
               }}
             >
               Sobre

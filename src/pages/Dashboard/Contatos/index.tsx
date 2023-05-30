@@ -12,7 +12,7 @@ export const Contatos = () => {
 
   useEffect(() => {
     refresh()
-  }, [refresh])
+  }, [])
 
   return (
     <StyledContact>

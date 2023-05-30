@@ -17,13 +17,6 @@ export const ContactContextProvider = ({ children }: ContactProviderProps) => {
   const [contacts, setContacts] = useState<Contact[]>([] as Contact[]);
   const navigate = useNavigate()
 
-  useEffect(() => {
-    (async () => {
-      const res = await api.get<Contact[]>("contacts");
-      setContacts(res.data);
-    })();
-  }, []);
-
   const refresh = async () => {
     try {
       const res = await api.get<Contact[]>("contacts");
@@ -32,6 +25,9 @@ export const ContactContextProvider = ({ children }: ContactProviderProps) => {
       navigate("login")
     }
   };
+  useEffect(() => {
+    refresh()
+  }, [])
 
   const contactRegister = async (data: iRegisterContactData) => {
     try {

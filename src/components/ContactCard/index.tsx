@@ -35,7 +35,7 @@ export const ContactCard = ({ contact }: ContactCardProps) => {
   const [editModal, setEditModal] = useState(false);
   const handleEditModal = () => setEditModal(!editModal);
 
-  const [deleteModal, setDeleteModal] = useState(true);
+  const [deleteModal, setDeleteModal] = useState(false);
   const handleDeleteModal = () => setDeleteModal(!deleteModal);
 
   return (
@@ -62,8 +62,16 @@ export const ContactCard = ({ contact }: ContactCardProps) => {
           <MdDateRange /> {getDate(created_at)}
         </h2>
       </div>
-      {deleteModal && <DeleteContactModal toggleModal={handleDeleteModal} contactId={contact.id} contactName={contact.name} />}
-      {editModal && <EditContactModal toggleModal={handleEditModal} contact={contact} />}
+      {deleteModal && (
+        <DeleteContactModal
+          toggleModal={handleDeleteModal}
+          contactId={contact.id}
+          contactName={contact.name}
+        />
+      )}
+      {editModal && (
+        <EditContactModal toggleModal={handleEditModal} contact={contact} />
+      )}
     </StyledContactCard>
   );
 };

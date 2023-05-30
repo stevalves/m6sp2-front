@@ -28,17 +28,17 @@ export const StyledHeader = styled.header<iHeader>`
         cursor: pointer;
         svg {
           font-size: 2rem;
-          color: var(--main-2);
+          color: var(--main-1);
           :hover {
-            color: var(--main-1);
+            color: var(--main-2);
             transition: 0.3s;
           }
         }
         ::after {
           content: "${(props) => props.contacts}";
           display: inline-block;
-          transform: translateY(-20px);
-          color: var(--main-2);
+          transform: translateY(-20px) translateX(-8px);
+          color: var(--gray-1);
           font-weight: 500;
         }
       }

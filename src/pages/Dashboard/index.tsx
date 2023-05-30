@@ -1,31 +1,14 @@
-import { api } from "../../services/api";
-import { useEffect, useState } from "react";
-
-interface Contact {
-  id: string;
-  name: string;
-  email: string;
-  phone: number;
-  created_at: Date;
-}
+import { Outlet } from "react-router-dom";
+import { Header } from "../../components/Header";
+import { useContacts } from "../../hooks/useContacts";
 
 export const Dashboard = () => {
-  const [contacts, setContacts] = useState<Contact[]>([]);
-  useEffect(() => {
-    (async () => {
-      const res = await api.get<Contact[]>("contacts");
-      setContacts(res.data);
-    })();
-  }, []);
+  const { contacts } = useContacts();
 
   return (
     <>
-      <h1>dash</h1>
-      <ul>
-        {contacts.map((contact) => (
-          <li key={contact.id}>{contact.name}</li>
-        ))}
-      </ul>
+      <Header contacts={contacts.length} />
+      <Outlet />
     </>
   );
 };

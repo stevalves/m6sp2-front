@@ -3,6 +3,7 @@ import { LoginData } from "../pages/Login/validator";
 import { ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -32,15 +33,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async (data: LoginData) => {
     try {
-      console.log(data);
       const res = await api.post("/login", data);
       const { token } = res.data;
 
       api.defaults.headers.common.authorization = `Bearer ${token}`;
       localStorage.setItem("@TOKEN", token);
 
+      toast.success("Login feito com sucesso!");
       navigate("dashboard");
     } catch (err) {
+      toast.error("Não foi possível realizar o login.");
       console.error(err);
     }
   };

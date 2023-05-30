@@ -28,9 +28,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
   }
-
+  
   button {
     cursor: pointer;
   }

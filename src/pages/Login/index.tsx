@@ -2,27 +2,45 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { LoginData, schema } from "./validator";
 import { useAuth } from "../../hooks/useAuth";
+import { StyledLogin } from "./styles";
+import { Form } from "../../components/Form";
+import { Input } from "../../components/Input";
+import { Link } from "react-router-dom";
 
 export const Login = () => {
-  const { register, handleSubmit } = useForm<LoginData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginData>({
     resolver: zodResolver(schema),
   });
 
   const { signIn } = useAuth();
 
   return (
-    <main>
-      <h2>Login</h2>
+      <StyledLogin>
+          <Form formTitle="Login" submiter={handleSubmit(signIn)}>
+            <Input
+              id="email"
+              label="E-mail"
+              placeholder="Insira seu e-mail..."
+              type="email"
+              {...register("email")}
+            />
+            {errors.email && <span>{errors.email.message}</span>}
+            <Input
+              id="password"
+              label="Senha"
+              placeholder="Insira sua senha..."
+              type="password"
+              {...register("password")}
+            />
+            {errors.password && <span>{errors.password.message}</span>}
 
-      <form onSubmit={handleSubmit(signIn)}>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" {...register("email")} />
-
-        <label htmlFor="password">password</label>
-        <input type="password" id="password" {...register("password")} />
-
-        <button type="submit">Submit</button>
-      </form>
-    </main>
+            <button type="submit">Entrar</button>
+            <Link to={"/register"}>Não possui registro?</Link>
+          </Form>
+      </StyledLogin>
   );
 };

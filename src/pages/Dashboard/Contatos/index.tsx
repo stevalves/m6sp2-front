@@ -19,7 +19,7 @@ export const Contatos = () => {
       <h2>Meus Contatos</h2>
       <ul>
         {contacts.map((contact) => (
-          <ContactCard contact={contact} />
+          <ContactCard contact={contact} key={contact.id} />
         ))}
       </ul>
       {modal && (

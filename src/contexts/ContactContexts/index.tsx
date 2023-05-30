@@ -23,9 +23,6 @@ export const ContactContextProvider = ({ children }: ContactProviderProps) => {
       console.error(err)
     }
   };
-  useEffect(() => {
-    refresh()
-  }, [])
 
   const contactRegister = async (data: iRegisterContactData) => {
     try {

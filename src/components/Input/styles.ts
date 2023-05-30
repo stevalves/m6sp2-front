@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const StyledInput = styled.fieldset`
     border: 1px solid var(--main-2);
-    background-color: var(--white-2);
+    background-color: var(--white-1);
     border-radius: 8px;
-    padding: 8px 1rem;
+    padding: 12px 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,11 +17,11 @@ export const StyledInput = styled.fieldset`
   }
 
   label {
-    color: var(--gray-2);
+    color: var(--main-1);
     font-weight: 500;
-    font-size: 1.25rem;
+    font-size: 1rem;
     display: block;
-    border-bottom: 1px solid var(--gray-2);
+    border-bottom: 1px solid var(--main-2);
     line-height: 150%;
   }
 
@@ -29,7 +29,7 @@ export const StyledInput = styled.fieldset`
     border: none;
     background-color: transparent;
     width: 100%;
-    height: 40px;
+    height: 15px;
     color: var(--gray-3);
     font-size: 1.25rem;
     :focus {

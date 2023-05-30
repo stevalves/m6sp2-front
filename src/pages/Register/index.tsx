@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import { RegisterData, schema } from "./validator";
 import { StyledRegister } from "./styles";
 import { Form } from "../../components/Form";
-import { Input } from "../../components/Input";
 import { Link } from "react-router-dom";
 import { useUsers } from "../../hooks/useUsers";
+import { Input } from "../../components/Input";
 
 export const Register = () => {
   const {

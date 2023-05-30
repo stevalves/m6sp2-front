@@ -12,6 +12,7 @@ interface AuthProviderProps {
 interface AuthContextValues {
   signIn: (data: LoginData) => void;
   loading: boolean;
+  reqLoading: boolean;
 }
 
 export const AuthContext = createContext<AuthContextValues>(
@@ -21,6 +22,7 @@ export const AuthContext = createContext<AuthContextValues>(
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
+  const [reqLoading, setReqLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -33,6 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async (data: LoginData) => {
     try {
+      setReqLoading(true)
       const res = await api.post("/login", data);
       const { token } = res.data;
 
@@ -44,11 +47,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     } catch (err) {
       toast.error("Não foi possível realizar o login.");
       console.error(err);
+    } finally {
+      setReqLoading(false)
     }
   };
 
   return (
-    <AuthContext.Provider value={{ signIn, loading }}>
+    <AuthContext.Provider value={{ signIn, loading, reqLoading }}>
       {children}
     </AuthContext.Provider>
   );

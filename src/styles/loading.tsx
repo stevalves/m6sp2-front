@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const LoadingRing = styled.div`
+export const LoadingRing = styled.div`
   display: inline-block;
   width: 20px;
   height: 20px;

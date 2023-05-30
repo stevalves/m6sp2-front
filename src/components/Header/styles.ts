@@ -12,7 +12,7 @@ export const StyledHeader = styled.header<iHeader>`
   width: 100%;
   padding: 0 3vh;
   background-color: var(--white-4);
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 
   nav {
     display: flex;
@@ -52,16 +52,20 @@ export const StyledHeader = styled.header<iHeader>`
       li {
         width: 100%;
         display: flex;
-      }
-      a {
-        font-size: 1.5rem;
-        width: 100%;
-        padding: 15px;
-        text-align: center;
-        color: var(--main-2);
-        :hover {
+        button {
+          all: unset;
+          cursor: pointer;
+          width: 100%;
+          padding: 24px;
+          display: flex;
+          justify-content: center;
+          font-size: 1.5rem;
+          text-align: center;
           color: var(--main-1);
-          transition: 0.3s;
+          :hover {
+            color: var(--main-2);
+            transition: 0.3s;
+          }
         }
       }
     }

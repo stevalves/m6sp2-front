@@ -4,8 +4,9 @@ import { LoginData, schema } from "./validator";
 import { useAuth } from "../../hooks/useAuth";
 import { StyledLogin } from "./styles";
 import { Form } from "../../components/Form";
-import { Input } from "../../components/Input";
 import { Link } from "react-router-dom";
+import { LoadingRing } from "../../styles/loading";
+import { Input } from "../../components/Input";
 
 export const Login = () => {
   const {
@@ -16,31 +17,33 @@ export const Login = () => {
     resolver: zodResolver(schema),
   });
 
-  const { signIn } = useAuth();
+  const { signIn, reqLoading } = useAuth();
 
   return (
-      <StyledLogin>
-          <Form formTitle="Login" submiter={handleSubmit(signIn)}>
-            <Input
-              id="email"
-              label="E-mail"
-              placeholder="Insira seu e-mail..."
-              type="email"
-              {...register("email")}
-            />
-            {errors.email && <span>{errors.email.message}</span>}
-            <Input
-              id="password"
-              label="Senha"
-              placeholder="Insira sua senha..."
-              type="password"
-              {...register("password")}
-            />
-            {errors.password && <span>{errors.password.message}</span>}
+    <StyledLogin>
+      <Form formTitle="Login" submiter={handleSubmit(signIn)}>
+        <Input
+          id="email"
+          label="E-mail"
+          placeholder="Insira seu e-mail..."
+          type="email"
+          {...register("email")}
+        />
+        {errors.email && <span>{errors.email.message}</span>}
+        <Input
+          id="password"
+          label="Senha"
+          placeholder="Insira sua senha..."
+          type="password"
+          {...register("password")}
+        />
+        {errors.password && <span>{errors.password.message}</span>}
 
-            <button type="submit">Entrar</button>
-            <Link to={"/register"}>Não possui registro?</Link>
-          </Form>
-      </StyledLogin>
+        <button type="submit" disabled={reqLoading}>
+          {reqLoading ? <LoadingRing /> : "Entrar"}
+        </button>
+        <Link to={"/register"}>Não possui registro?</Link>
+      </Form>
+    </StyledLogin>
   );
 };

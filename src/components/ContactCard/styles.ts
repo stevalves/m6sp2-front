@@ -8,11 +8,11 @@ export const StyledContactCard = styled.li`
   margin-top: 1rem;
   overflow: hidden;
 
-  h2>svg {
+  h2 > svg {
     transform: translateY(3px);
   }
 
-  div:nth-child(1) {
+  > div:nth-child(1) {
     height: 30px;
     display: flex;
     align-items: center;
@@ -20,26 +20,30 @@ export const StyledContactCard = styled.li`
     background-color: var(--main-3);
     border-radius: 12px 12px 0 0;
     padding: 1rem 5%;
-    h3{
+    h3 {
       color: var(--white);
       font-weight: 500;
       font-size: 1.15rem;
     }
-    button {
-      all: unset;
-      cursor: pointer;
-      svg {
-        color: var(--white);
-        font-weight: 500;
-        font-size: 1.15rem;
+    div {
+      display: flex;
+      gap: 0.5rem;
+      button {
+        all: unset;
+        cursor: pointer;
+        svg {
+          color: var(--white);
+          font-weight: 500;
+          font-size: 1.15rem;
+        }
       }
     }
   }
-  div:nth-child(2) {
+  > div:nth-child(2) {
     padding: 1rem 5%;
   }
 
   @media (max-width: 600px) {
-      width: 100%;
-    }
-`
+    width: 100%;
+  }
+`;

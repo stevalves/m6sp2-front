@@ -3,10 +3,11 @@ import { BsPersonFillAdd } from "react-icons/bs";
 import { StyledHeader } from "./styles";
 import { iHeader } from "./types";
 import { Logo } from "../Logo";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AddContactModal } from "../AddContactModal";
 
 export function Header({ contacts }: iHeader) {
+  const navigate = useNavigate();
   const [menuDrop, setMenuDrop] = useState("" as string);
 
   function handleClick(): void {
@@ -14,7 +15,12 @@ export function Header({ contacts }: iHeader) {
   }
 
   const [modal, setModal] = useState(false);
-  const handleModal = () => setModal(!modal)
+  const handleModal = () => setModal(!modal);
+
+  const handlePage = (e: React.MouseEvent<HTMLButtonElement>, to: string) => {
+    handleClick();
+    navigate(to);
+  };
 
   return (
     <StyledHeader contacts={contacts}>
@@ -35,13 +41,31 @@ export function Header({ contacts }: iHeader) {
         </div>
         <ul role="menu">
           <li>
-            <Link to={""}>Home</Link>
+            <button
+              onClick={(e) => {
+                handlePage(e, "");
+              }}
+            >
+              Home
+            </button>
           </li>
           <li>
-            <Link to={"perfil"}>Perfil</Link>
+            <button
+              onClick={(e) => {
+                handlePage(e, "perfil");
+              }}
+            >
+              Perfil
+            </button>
           </li>
           <li>
-            <Link to={"sobre"}>Sobre</Link>
+            <button
+              onClick={(e) => {
+                handlePage(e, "sobre");
+              }}
+            >
+              Sobre
+            </button>
           </li>
         </ul>
       </nav>

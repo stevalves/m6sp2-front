@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Modal } from "../Modal";
-import { ModalInput } from "../ModalInput";
 import { StyledAddContactForm } from "./styles";
 import { useForm } from "react-hook-form";
 import { RegisterContactData, schema } from "./validation";
@@ -8,6 +7,7 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useContacts } from "../../hooks/useContacts";
 import { Contact } from "../../contexts/ContactContexts/types";
+import { Input } from "../Input";
 
 type AddContactModalProps = {
   toggleModal: () => void;
@@ -30,13 +30,12 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
         ...data,
         phone: Number(data.phone),
       });
-  
-      refresh()
+
+      refresh();
       toggleModal();
       toast.success("Contato cadastrado com sucesso!");
     } catch (error) {
-      
-      console.error(error)
+      console.error(error);
       toggleModal();
       toast.error("Não foi possível cadastrar o contato!");
     }
@@ -46,7 +45,7 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
     <Modal toggleModal={toggleModal}>
       <StyledAddContactForm onSubmit={handleSubmit(createContact)}>
         <h2>Adicionar Contato</h2>
-        <ModalInput
+        <Input
           id="name"
           label="Nome"
           placeholder="Insira o nome do contato..."
@@ -54,7 +53,7 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
           {...register("name")}
         />
         {errors.name && <span>{errors.name.message}</span>}
-        <ModalInput
+        <Input
           id="email"
           label="E-mail"
           placeholder="Insira o e-mail do contato..."
@@ -62,7 +61,7 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
           {...register("email")}
         />
         {errors.email && <span>{errors.email.message}</span>}
-        <ModalInput
+        <Input
           id="phone"
           label="Telefone"
           placeholder="Insira o telefone do contato..."

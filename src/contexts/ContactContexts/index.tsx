@@ -7,7 +7,6 @@ import {
   iRegisterContactData,
 } from "./types";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 
 export const ContactContext = createContext<ContactProviderValues>(
   {} as ContactProviderValues
@@ -15,14 +14,13 @@ export const ContactContext = createContext<ContactProviderValues>(
 
 export const ContactContextProvider = ({ children }: ContactProviderProps) => {
   const [contacts, setContacts] = useState<Contact[]>([] as Contact[]);
-  const navigate = useNavigate()
 
   const refresh = async () => {
     try {
       const res = await api.get<Contact[]>("contacts");
       setContacts(res.data);
     } catch (err) {
-      navigate("login")
+      console.error(err)
     }
   };
   useEffect(() => {

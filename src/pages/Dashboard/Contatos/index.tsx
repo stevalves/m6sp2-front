@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ContactCard } from "../../../components/ContactCard";
-import { Modal } from "../../../components/Modal";
 import { StyledContact } from "./styles";
 import { useContacts } from "../../../hooks/useContacts";
 
 export const Contatos = () => {
   const { contacts, refresh } = useContacts();
-
-  const [modal, setModal] = useState(false);
-  const handleModal = () => setModal(!modal);
 
   useEffect(() => {
     refresh();
@@ -22,11 +18,6 @@ export const Contatos = () => {
           <ContactCard contact={contact} key={contact.id} />
         ))}
       </ul>
-      {modal && (
-        <Modal toggleModal={handleModal}>
-          <></>
-        </Modal>
-      )}
     </StyledContact>
   );
 };

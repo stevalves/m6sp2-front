@@ -5,6 +5,7 @@ import { MdDateRange } from "react-icons/md";
 import { Contact } from "../../contexts/ContactContexts/types";
 import { useState } from "react";
 import { EditContactModal } from "../EditContactModal";
+import { DeleteContactModal } from "../DeleteContactModal";
 
 interface ContactCardProps {
   contact: Contact;
@@ -31,18 +32,21 @@ export const ContactCard = ({ contact }: ContactCardProps) => {
     return `${day}/${month}/${date.getFullYear()} ${hours}:${minutes}`;
   };
 
-  const [modal, setModal] = useState(false);
-  const handleModal = () => setModal(!modal);
+  const [editModal, setEditModal] = useState(false);
+  const handleEditModal = () => setEditModal(!editModal);
+
+  const [deleteModal, setDeleteModal] = useState(true);
+  const handleDeleteModal = () => setDeleteModal(!deleteModal);
 
   return (
     <StyledContactCard key={id}>
       <div>
         <h3>{name}</h3>
         <div>
-          <button onClick={handleModal}>
+          <button onClick={handleEditModal}>
             <AiOutlineEdit />
           </button>
-          <button>
+          <button onClick={handleDeleteModal}>
             <AiOutlineDelete />
           </button>
         </div>
@@ -58,7 +62,8 @@ export const ContactCard = ({ contact }: ContactCardProps) => {
           <MdDateRange /> {getDate(created_at)}
         </h2>
       </div>
-      {modal && <EditContactModal toggleModal={handleModal} contact={contact} />}
+      {deleteModal && <DeleteContactModal toggleModal={handleDeleteModal} contactId={contact.id} contactName={contact.name} />}
+      {editModal && <EditContactModal toggleModal={handleEditModal} contact={contact} />}
     </StyledContactCard>
   );
 };

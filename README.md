@@ -11,6 +11,7 @@
 * react-icons
 * react-toastify
 * zod
+* jspdf/jspdf-autotable
 
 ###
 

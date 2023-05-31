@@ -1,4 +1,5 @@
 # OurC - Front
+### *O Objetivo foi desenvolver um front para um serviço de back-end responsável por simular uma agenda, podendo adicionar/remover contatos.*
 
 ## **Tecnologias e bibliotecas**:
 * React

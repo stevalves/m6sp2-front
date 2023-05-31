@@ -34,7 +34,7 @@ export const EditUserModal = ({
   };
 
   const deleteUser = async () => {
-    userDelete()
+    await userDelete()
     toggleModal();
 };
 

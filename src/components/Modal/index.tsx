@@ -6,9 +6,10 @@ import { createPortal } from "react-dom";
 type ModalProps = {
   children: ReactNode;
   toggleModal: () => void;
+  noClose?: boolean
 };
 
-export const Modal = ({ children, toggleModal }: ModalProps) => {
+export const Modal = ({ children, toggleModal, noClose }: ModalProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -34,8 +35,8 @@ export const Modal = ({ children, toggleModal }: ModalProps) => {
 
   return createPortal(
     <StyledModal>
-      <div ref={ref}>
-        <button onClick={toggleModal}>
+      <div ref={noClose ? null : ref}>
+        <button onClick={noClose ? () => {return} : toggleModal}>
           <MdClose />
         </button>
         {children}

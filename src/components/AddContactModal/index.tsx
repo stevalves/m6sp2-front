@@ -28,10 +28,9 @@ export const AddContactModal = ({ toggleModal }: AddContactModalProps) => {
     try {
       const res = await api.post<Contact>("/contacts", {
         ...data,
-        phone: Number(data.phone),
       });
 
-      setContacts(previousContacts => [res.data, ...previousContacts])
+      setContacts((previousContacts) => [res.data, ...previousContacts]);
       toggleModal();
       toast.success("Contato cadastrado com sucesso!");
     } catch (error) {

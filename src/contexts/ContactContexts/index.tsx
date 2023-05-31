@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { api } from "../../services/api";
 import {
   Contact,
@@ -20,13 +20,13 @@ export const ContactContextProvider = ({ children }: ContactProviderProps) => {
       const res = await api.get<Contact[]>("contacts");
       setContacts(res.data);
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   };
 
   const contactRegister = async (data: iRegisterContactData) => {
     try {
-      await api.post("contacts", { ...data, phone: Number(data.phone) });
+      await api.post("contacts", { ...data });
     } catch (err) {
       toast.error("Não foi possível realizar o cadastro.");
       console.error(err);
@@ -34,7 +34,9 @@ export const ContactContextProvider = ({ children }: ContactProviderProps) => {
   };
 
   return (
-    <ContactContext.Provider value={{ contactRegister, contacts, setContacts, refresh }}>
+    <ContactContext.Provider
+      value={{ contactRegister, contacts, setContacts, refresh }}
+    >
       {children}
     </ContactContext.Provider>
   );

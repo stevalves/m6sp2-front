@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledContatosVazio = styled.main`
+export const StyledContactsEmpty = styled.main`
 
   width: 100%;
   height: 150px;

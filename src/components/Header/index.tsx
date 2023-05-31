@@ -58,15 +58,6 @@ export function Header({ contacts }: iHeader) {
               Perfil
             </button>
           </li>
-          <li>
-            <button
-              onClick={() => {
-                handlePage("sobre");
-              }}
-            >
-              Sobre
-            </button>
-          </li>
         </ul>
       </nav>
       {modal && <AddContactModal toggleModal={handleModal} />}

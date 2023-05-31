@@ -34,7 +34,6 @@ export const EditContactModal = ({
     try {
       await api.patch<Contact>(`/contacts/${contact.id}`, {
         ...data,
-        phone: Number(data.phone),
       });
 
       refresh();

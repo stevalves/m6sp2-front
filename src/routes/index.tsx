@@ -5,7 +5,6 @@ import { ProtectedRoutes } from "./ProtectedRoutes";
 import { Homepage } from "../pages/Homepage";
 import { Register } from "../pages/Register";
 import { Contatos } from "../pages/Dashboard/Contatos";
-import { Sobre } from "../pages/Dashboard/Sobre";
 import { Perfil } from "../pages/Dashboard/Perfil";
 
 export const RoutesMain = () => {
@@ -17,7 +16,6 @@ export const RoutesMain = () => {
       <Route element={<ProtectedRoutes />}>
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Contatos />} />
-          <Route path="sobre" element={<Sobre />} />
           <Route path="perfil" element={<Perfil />} />
         </Route>
       </Route>

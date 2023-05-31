@@ -21,6 +21,7 @@ export const StyledModal = styled.div`
     padding: 1rem;
     position: relative;
     animation: down 1s ease-in-out;
+    overflow-y: auto;
 
     @keyframes down {
       from{ transform: translateY(-20px)}

@@ -4,9 +4,9 @@ export const StyledContactCard = styled.li`
   width: 30%;
   height: max-content;
   border-radius: 12px;
-  border: 1px solid var(--main-2);
   margin-top: 1rem;
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 
   h2 > svg {
     transform: translateY(3px);
@@ -17,8 +17,7 @@ export const StyledContactCard = styled.li`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--main-3);
-    border-radius: 12px 12px 0 0;
+    background-color: var(--main-1);
     padding: 1rem 5%;
     h3 {
       color: var(--white);
@@ -35,6 +34,10 @@ export const StyledContactCard = styled.li`
           color: var(--white);
           font-weight: 500;
           font-size: 1.15rem;
+          :hover {
+            color: var(--gray-4);
+            transition: .2s;
+          }
         }
       }
     }

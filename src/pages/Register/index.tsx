@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useUsers } from "../../hooks/useUsers";
 import { Input } from "../../components/Input";
 import { ApiWorking } from "../../components/ApiWorking";
+import { LoadingRing } from "../../styles/loading";
 
 export const Register = () => {
   const {
@@ -17,7 +18,7 @@ export const Register = () => {
     resolver: zodResolver(schema),
   });
 
-  const { userRegister } = useUsers();
+  const { userRegister, reqLoading } = useUsers();
 
   return (
     <StyledRegister>
@@ -56,7 +57,9 @@ export const Register = () => {
         />
         {errors.phone && <span>{errors.phone.message}</span>}
 
-        <button type="submit">Cadastrar</button>
+        <button type="submit" disabled={reqLoading}>
+          {reqLoading ? <LoadingRing /> : "Cadastrar"}
+        </button>
         <Link to={"/login"}>Já possui cadastro?</Link>
       </Form>
     </StyledRegister>

@@ -6,6 +6,7 @@ import { Form } from "../../components/Form";
 import { Link } from "react-router-dom";
 import { useUsers } from "../../hooks/useUsers";
 import { Input } from "../../components/Input";
+import { ApiWorking } from "../../components/ApiWorking";
 
 export const Register = () => {
   const {
@@ -20,6 +21,7 @@ export const Register = () => {
 
   return (
     <StyledRegister>
+      <ApiWorking />
       <Form formTitle="Registro" submiter={handleSubmit(userRegister)}>
         <Input
           id="name"

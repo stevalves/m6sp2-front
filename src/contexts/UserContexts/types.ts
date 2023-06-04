@@ -43,4 +43,6 @@ export interface UserProviderValues {
     setUser: React.Dispatch<React.SetStateAction<iUser>>;
     user: iUser;
     userDelete: () => Promise<void>
+    apiWorking: () => Promise<void>
+    reqLoading: boolean
 }

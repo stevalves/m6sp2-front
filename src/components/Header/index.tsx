@@ -5,10 +5,12 @@ import { iHeader } from "./types";
 import { Logo } from "../Logo";
 import { useNavigate } from "react-router-dom";
 import { AddContactModal } from "../AddContactModal";
+import { useAuth } from "../../hooks/useAuth";
 
 export function Header({ contacts }: iHeader) {
   const navigate = useNavigate();
   const [menuDrop, setMenuDrop] = useState("" as string);
+  const { signOut } = useAuth();
 
   function handleClick(): void {
     menuDrop === "active" ? setMenuDrop("") : setMenuDrop("active");
@@ -57,6 +59,9 @@ export function Header({ contacts }: iHeader) {
             >
               Perfil
             </button>
+          </li>
+          <li>
+            <button onClick={signOut}>Sair</button>
           </li>
         </ul>
       </nav>

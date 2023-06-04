@@ -11,6 +11,7 @@ interface AuthProviderProps {
 
 interface AuthContextValues {
   signIn: (data: LoginData) => void;
+  signOut: () => void
   loading: boolean;
   reqLoading: boolean;
 }
@@ -35,7 +36,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async (data: LoginData) => {
     try {
-      setReqLoading(true)
+      setReqLoading(true);
       const res = await api.post("/login", data);
       const { token } = res.data;
 
@@ -48,12 +49,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       toast.error("Não foi possível realizar o login.");
       console.error(err);
     } finally {
-      setReqLoading(false)
+      setReqLoading(false);
+    }
+  };
+
+  const signOut = () => {
+    try {
+      localStorage.removeItem("@TOKEN");
+      toast.success("Sessão finalizada!");
+      navigate("");
+    } catch (err) {
+      toast.error("Não foi possível finalizar a sessão.");
+      console.error(err);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ signIn, loading, reqLoading }}>
+    <AuthContext.Provider value={{ signIn, signOut, loading, reqLoading }}>
       {children}
     </AuthContext.Provider>
   );

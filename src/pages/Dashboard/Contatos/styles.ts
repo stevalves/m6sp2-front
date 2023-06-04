@@ -18,7 +18,7 @@ export const StyledContact = styled.main`
       font-size: 2rem;
     }
     button {
-      height: 40px;
+      min-height: 40px;
       padding: .5rem;
       border-radius: 4px;
       background-color: var(--white-2);

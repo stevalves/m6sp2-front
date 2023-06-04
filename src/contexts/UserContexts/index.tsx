@@ -31,6 +31,7 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
 
   const userRegister = async (data: iRegisterData) => {
     try {
+      setReqLoading(true)
       await api
         .post("users", { ...data })
         .then(() => {
@@ -45,6 +46,8 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
     } catch (err) {
       toast.error("Não foi possível realizar o cadastro.");
       console.error(err);
+    } finally {
+      setReqLoading(false)
     }
   };
 

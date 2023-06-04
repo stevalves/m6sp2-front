@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
+import { api, checkApi } from "../../services/api";
 import {
   UserProviderProps,
   UserProviderValues,
@@ -16,6 +16,7 @@ export const UserContext = createContext<UserProviderValues>(
 
 export const UserContextProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState({} as iUser);
+  const [reqLoading, setReqLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const userRetrieve = async () => {
@@ -78,9 +79,21 @@ export const UserContextProvider = ({ children }: UserProviderProps) => {
     }
   };
 
+  const apiWorking = async () => {
+    try {
+      setReqLoading(true)
+      await checkApi.get("")
+      toast.success("Api funcionando!");
+    } catch (error) {
+      toast.error("Api não está funcionando!")
+    } finally {
+      setReqLoading(false)
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ userRegister, userEdit, setUser, user, userRetrieve, userDelete }}
+      value={{ userRegister, userEdit, setUser, user, userRetrieve, userDelete, apiWorking, reqLoading }}
     >
       {children}
     </UserContext.Provider>

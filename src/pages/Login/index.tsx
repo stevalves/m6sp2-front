@@ -7,6 +7,7 @@ import { Form } from "../../components/Form";
 import { Link } from "react-router-dom";
 import { LoadingRing } from "../../styles/loading";
 import { Input } from "../../components/Input";
+import { ApiWorking } from "../../components/ApiWorking";
 
 export const Login = () => {
   const {
@@ -21,6 +22,7 @@ export const Login = () => {
 
   return (
     <StyledLogin>
+      <ApiWorking />
       <Form formTitle="Login" submiter={handleSubmit(signIn)}>
         <Input
           id="email"

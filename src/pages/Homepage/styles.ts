@@ -10,7 +10,7 @@ export const StyledHomepage = styled.main`
   justify-content: center;
   flex-direction: column;
 
-  > div {
+  > div:nth-child(2) {
     width: 90%;
     max-width: 600px;
     background: var(--gray-trans);
